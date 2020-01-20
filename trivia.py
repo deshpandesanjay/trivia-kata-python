@@ -4,6 +4,7 @@
 class Game:
     def __init__(self):
         self.winner = winner(self)
+        self.wrongans = wrongans(self)
 
         self.players = []
         self.places = [0] * 6
@@ -135,13 +136,19 @@ class Game:
             return winner
 
     def wrong_answer(self):
-        print('Question was incorrectly answered')
-        print(self.players[self.current_player] + " was sent to the penalty box")
-        self.in_penalty_box[self.current_player] = True
+        return self.wrongans.wrong_answer()
 
-        self.current_player += 1
-        if self.current_player == len(self.players): self.current_player = 0
-        return True
+    # def _did_player_win(self):
+    #     return not (self.purses[self.current_player] == 6)
+
+    # def wrong_answer(self):
+    #     print('Question was incorrectly answered')
+    #     print(self.players[self.current_player] + " was sent to the penalty box")
+    #     self.in_penalty_box[self.current_player] = True
+    #
+    #     self.current_player += 1
+    #     if self.current_player == len(self.players): self.current_player = 0
+    #     return True
 
     # def _did_player_win(self):
     #     return not (self.purses[self.current_player] == 6)
@@ -156,6 +163,19 @@ class winner:
 
     def did_player_win(self):
         return not (self.game.purses[self.game.current_player] == 6)
+
+class wrongans:
+    def __init__(self, game):
+        self.game = game
+
+    def wrong_answer(self):
+        print('Question was incorrectly answered')
+        print(self.game.players[self.game.current_player] + " was sent to the penalty box")
+        self.game.in_penalty_box[self.game.current_player] = True
+
+        self.game.current_player += 1
+        if self.game.current_player == len(self.game.players): self.game.current_player = 0
+        return True
 
 from random import randrange
 from random import seed
