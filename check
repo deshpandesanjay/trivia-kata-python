@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+set -euo pipefail
+
+python trivia.py $1 > ./tmp/actual_$1.txt
+
+set +e
+diff -q ./tests/kat_$1.txt ./tmp/actual_$1.txt
+RESULT=$?
+if [ $RESULT -eq 0 ]; then
+    echo "CHECK for SEED $1 is OK"
+    exit 0
+else
+    diff ./tests/kat_$1.txt ./tmp/actual_$1.txt
+    echo "CHECK for SEED $1 is NOT OK"
+    exit -1
+fi
+set -e
