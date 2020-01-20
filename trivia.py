@@ -4,7 +4,7 @@
 class Game:
     def __init__(self):
         self.winner = winner(self)
-        # self.wrongans = wrongans(self)
+        self.ask_ques = ask_ques(self)
 
         self.players = []
         self.places = [0] * 6
@@ -80,10 +80,11 @@ class Game:
             self._ask_question()
 
     def _ask_question(self):
-        if self._current_category == 'Pop': print(self.pop_questions.pop(0))
-        if self._current_category == 'Science': print(self.science_questions.pop(0))
-        if self._current_category == 'Sports': print(self.sports_questions.pop(0))
-        if self._current_category == 'Rock': print(self.rock_questions.pop(0))
+        return self.ask_ques._ask_question()
+        # if self._current_category == 'Pop': print(self.pop_questions.pop(0))
+        # if self._current_category == 'Science': print(self.science_questions.pop(0))
+        # if self._current_category == 'Sports': print(self.sports_questions.pop(0))
+        # if self._current_category == 'Rock': print(self.rock_questions.pop(0))
 
     @property
     def _current_category(self):
@@ -147,15 +148,6 @@ class Game:
     # def _did_player_win(self):
     #     return not (self.purses[self.current_player] == 6)
 
-    # def wrong_answer(self):
-    #     print('Question was incorrectly answered')
-    #     print(self.players[self.current_player] + " was sent to the penalty box")
-    #     self.in_penalty_box[self.current_player] = True
-    #
-    #     self.current_player += 1
-    #     if self.current_player == len(self.players): self.current_player = 0
-    #     return True
-
     # def _did_player_win(self):
     #     return not (self.purses[self.current_player] == 6)
 
@@ -170,9 +162,15 @@ class winner:
     def did_player_win(self):
         return not (self.game.purses[self.game.current_player] == 6)
 
-# class wrongans:
-#     def __init__(self, game):
-#         self.game = game
+class ask_ques:
+    def __init__(self, game):
+        self.game = game
+    def _ask_question(self):
+        if self.game._current_category == 'Pop': print(self.game.pop_questions.pop(0))
+        if self.game._current_category == 'Science': print(self.game.science_questions.pop(0))
+        if self.game._current_category == 'Sports': print(self.game.sports_questions.pop(0))
+        if self.game._current_category == 'Rock': print(self.game.rock_questions.pop(0))
+
 
 
 from random import randrange
