@@ -136,7 +136,13 @@ class Game:
             return winner
 
     def wrong_answer(self):
-        return self.wrongans.wrong_answer()
+        if self.wrongans.wrong_answer():
+            self.in_penalty_box[self.current_player] = True
+
+            self.current_player += 1
+            if self.current_player == len(self.players): self.current_player = 0
+            return True
+        return False
 
     # def _did_player_win(self):
     #     return not (self.purses[self.current_player] == 6)
@@ -171,10 +177,6 @@ class wrongans:
     def wrong_answer(self):
         print('Question was incorrectly answered')
         print(self.game.players[self.game.current_player] + " was sent to the penalty box")
-        self.game.in_penalty_box[self.game.current_player] = True
-
-        self.game.current_player += 1
-        if self.game.current_player == len(self.game.players): self.game.current_player = 0
         return True
 
 from random import randrange
