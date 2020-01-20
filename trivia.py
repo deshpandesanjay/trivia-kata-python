@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 
+
 class Game:
     def __init__(self):
+        self.winner = winner(self)
+
         self.players = []
         self.places = [0] * 6
         self.purses = [0] * 6
@@ -20,6 +23,7 @@ class Game:
             self.science_questions.append("Science Question %s" % i)
             self.sports_questions.append("Sports Question %s" % i)
             self.rock_questions.append(self.create_rock_question(i))
+
 
     def create_rock_question(self, index):
         return "Rock Question %s" % index
@@ -139,9 +143,19 @@ class Game:
         if self.current_player == len(self.players): self.current_player = 0
         return True
 
-    def _did_player_win(self):
-        return not (self.purses[self.current_player] == 6)
+    # def _did_player_win(self):
+    #     return not (self.purses[self.current_player] == 6)
 
+    def _did_player_win(self):
+        return self.winner.did_player_win()
+
+
+class winner:
+    def __init__(self, game):
+        self.game = game
+
+    def did_player_win(self):
+        return not (self.game.purses[self.game.current_player] == 6)
 
 from random import randrange
 from random import seed
