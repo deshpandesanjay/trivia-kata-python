@@ -7,11 +7,6 @@ class Game:
         self.purses = [0] * 6
         self.in_penalty_box = [0] * 6
 
-        self.pop_questions = []
-        self.science_questions = []
-        self.sports_questions = []
-        self.rock_questions = []
-
         self.current_player = 0
         self.is_getting_out_of_penalty_box = False
 
@@ -143,6 +138,15 @@ class Game:
         return not (self.purses[self.current_player] == 6)
 
 
+class questions_catagories (Game):
+    def __init__(self):
+        Game.__init__(self)
+        self.pop_questions = []
+        self.science_questions = []
+        self.sports_questions = []
+        self.rock_questions = []
+
+
 from random import randrange
 from random import seed
 import sys
@@ -150,7 +154,8 @@ import sys
 if __name__ == '__main__':
     not_a_winner = False
 
-    game = Game()
+    # game = Game()
+    game = questions_catagories()
 
     if len(sys.argv) > 1:
         seed(sys.argv[1])
@@ -168,3 +173,4 @@ if __name__ == '__main__':
             not_a_winner = game.was_correctly_answered()
 
         if not not_a_winner: break
+
