@@ -4,7 +4,7 @@
 class Game:
     def __init__(self):
         self.winner = winner(self)
-        self.wrongans = wrongans(self)
+        # self.wrongans = wrongans(self)
 
         self.players = []
         self.places = [0] * 6
@@ -136,9 +136,10 @@ class Game:
             return winner
 
     def wrong_answer(self):
-        self.wrongans.wrong_answer()
+        print('Question was incorrectly answered')
+        print(self.players[self.current_player] + " was sent to the penalty box")
+        # self.wrongans.wrong_answer()
         self.in_penalty_box[self.current_player] = True
-
         self.current_player += 1
         if self.current_player == len(self.players): self.current_player = 0
         return True
@@ -169,13 +170,10 @@ class winner:
     def did_player_win(self):
         return not (self.game.purses[self.game.current_player] == 6)
 
-class wrongans:
-    def __init__(self, game):
-        self.game = game
+# class wrongans:
+#     def __init__(self, game):
+#         self.game = game
 
-    def wrong_answer(self):
-        print('Question was incorrectly answered')
-        print(self.game.players[self.game.current_player] + " was sent to the penalty box")
 
 from random import randrange
 from random import seed
