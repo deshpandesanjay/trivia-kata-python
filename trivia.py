@@ -144,11 +144,16 @@ class Game:
 
 
 from random import randrange
+from random import seed
+import sys
 
 if __name__ == '__main__':
     not_a_winner = False
 
     game = Game()
+
+    if len(sys.argv) > 1:
+        seed(sys.argv[1])
 
     game.add('Chet')
     game.add('Pat')
