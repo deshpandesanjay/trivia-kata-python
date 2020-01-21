@@ -80,7 +80,7 @@ class Game:
             self._ask_question()
 
     def _ask_question(self):
-        return self.ask_ques._ask_question()
+        return self.ask_ques._ask_question(self._current_category)
         # if self._current_category == 'Pop': print(self.pop_questions.pop(0))
         # if self._current_category == 'Science': print(self.science_questions.pop(0))
         # if self._current_category == 'Sports': print(self.sports_questions.pop(0))
@@ -165,11 +165,13 @@ class winner:
 class ask_ques:
     def __init__(self, game):
         self.game = game
-    def _ask_question(self):
-        if self.game._current_category == 'Pop': print(self.game.pop_questions.pop(0))
-        if self.game._current_category == 'Science': print(self.game.science_questions.pop(0))
-        if self.game._current_category == 'Sports': print(self.game.sports_questions.pop(0))
-        if self.game._current_category == 'Rock': print(self.game.rock_questions.pop(0))
+
+    def _ask_question(self, category):
+        if category == 'Pop': print(self.game.pop_questions.pop(0))
+        if category == 'Science': print(self.game.science_questions.pop(0))
+        if category == 'Sports': print(self.game.sports_questions.pop(0))
+        if category == 'Rock': print(self.game.rock_questions.pop(0))
+        category = 'NONE'
 
 
 
